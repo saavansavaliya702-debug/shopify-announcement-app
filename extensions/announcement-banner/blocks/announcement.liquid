@@ -1,0 +1,66 @@
+{% comment %}
+  App Embed Block: Announcement Banner
+
+  This block is NOT a Section Block, so it is not placed manually inside
+  a template — merchants toggle it on under
+  Theme Editor > App embeds, and once enabled it renders on every page
+  (it is injected near the <body> via the theme's app-embed mechanism).
+
+  It reads the Shop-level metafield that the backend wrote in Step 2
+  (namespace: my_app, key: announcement) and displays it as a floating
+  banner. If the metafield is empty, nothing renders.
+{% endcomment %}
+
+{% assign announcement_text = shop.metafields.my_app.announcement %}
+
+{% if announcement_text != blank %}
+  <div
+    class="announcement-banner-app-embed"
+    style="
+      background-color: {{ block.settings.background_color }};
+      color: {{ block.settings.text_color }};
+    "
+  >
+    <p class="announcement-banner-app-embed__text">{{ announcement_text }}</p>
+  </div>
+
+  <style>
+    .announcement-banner-app-embed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      width: 100%;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      box-sizing: border-box;
+    }
+    .announcement-banner-app-embed__text {
+      margin: 0;
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Banner",
+  "target": "body",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}
