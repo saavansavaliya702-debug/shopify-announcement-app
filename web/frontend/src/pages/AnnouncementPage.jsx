@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   Page,
-  Card,
+  Card,git add src/config.js src/pages/AnnouncementPage.jsx
   TextField,
   Button,
   BlockStack,
@@ -10,6 +10,7 @@ import {
   Badge,
   InlineStack,
 } from "@shopify/polaris";
+import { API_BASE_URL } from "../config";
 
 export default function AnnouncementPage() {
   const [text, setText] = useState("");
@@ -19,7 +20,7 @@ export default function AnnouncementPage() {
 
   const loadCurrent = useCallback(async () => {
     try {
-      const res = await fetch("/api/announcement/current");
+      const res = await fetch(`${API_BASE_URL}/api/announcement/current`);
       const data = await res.json();
       if (data.current?.text) setText(data.current.text);
     } catch (err) {
@@ -29,7 +30,7 @@ export default function AnnouncementPage() {
 
   const loadHistory = useCallback(async () => {
     try {
-      const res = await fetch("/api/announcement/history");
+      const res = await fetch(`${API_BASE_URL}/api/announcement/history`);
       const data = await res.json();
       setHistory(data.history || []);
     } catch (err) {
@@ -46,7 +47,7 @@ export default function AnnouncementPage() {
     setSaving(true);
     setFeedback(null);
     try {
-      const res = await fetch("/api/announcement", {
+      const res = await fetch(`${API_BASE_URL}/api/announcement`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
