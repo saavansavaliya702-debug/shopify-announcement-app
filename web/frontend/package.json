@@ -12,11 +12,8 @@
   "dependencies": {
     "@shopify/polaris": "^13.9.5",
     "react": "^18.3.1",
-<<<<<<< HEAD
-    "react-dom": "^18.3.1"
-=======
     "react-dom": "^18.3.1",
->>>>>>> 3b8005a01c4a6af33c05325006c61c1895a199c1
+    "react-router-dom": "^7.18.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -33,4 +30,3 @@
     "@rolldown/binding-win32-x64-msvc": "^1.1.3"
   }
 }
-
